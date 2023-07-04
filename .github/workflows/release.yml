@@ -10,5 +10,9 @@ jobs:
         uses: actions/checkout@v3
       - name: Zip extension
         run: ./build.sh
-      - name: List
-        run: ls
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          generate_release_notes: true
+          files: alternate_twitter_embed.zip
